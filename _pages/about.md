@@ -3,6 +3,8 @@ permalink: /
 title: "Hi, I'm Yi Hao!"
 excerpt: "About Me"
 author_profile: true
+redirect_from:
+ - /about/
 ---
 
 

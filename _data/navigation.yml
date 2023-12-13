@@ -1,9 +1,9 @@
 # main links
 main:
   - title: "About"
-    url: /_pages/about.md
+    url: /about/
   - title: "Blog"
-    url: /_posts/
+    url: /posts/
   - title: "Resume"
     url: /files/YiHaoWong_Resume.pdf
   # - title: "Sample Posts"
