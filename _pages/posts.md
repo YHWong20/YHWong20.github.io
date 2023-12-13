@@ -5,7 +5,6 @@ permalink: /posts/
 author_profile: true
 ---
 
-{% include base_path %}
 {% include group-by-array collection=site.posts field="categories" %}
 
 {% for category in group_names %}
