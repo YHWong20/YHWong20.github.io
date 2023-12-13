@@ -3,10 +3,9 @@ permalink: /
 title: "Hi, I'm Yi Hao!"
 excerpt: "About Me"
 author_profile: true
-redirect_from:
- - /about/
- - /about.html
 ---
+
+
 
 # About Me
 I am a third-year Information Security Student at the National University of Singapore!

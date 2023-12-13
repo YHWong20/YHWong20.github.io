@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Yi Hao Wong"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/profile.jpg"
   bio              : "3rd Year Information Security @ NUS, Aspiring Cybersecurity/Cloud Security Engineer"
   location         : "Singapore"
   email            :
@@ -135,6 +135,7 @@ footer:
 include:
   - .htaccess
   - _pages
+  - "_pages"
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -269,3 +270,10 @@ defaults:
       comments: # true
       share: true
       related: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
