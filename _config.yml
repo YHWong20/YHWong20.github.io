@@ -22,7 +22,7 @@ subtitle                 : # site tagline that appears below site title in masth
 name                     : "Wong Yi Hao"
 description              : "Documenting My Cybersecurity Journey."
 url                      : "https://YHWong20.github.io"
-baseurl                  : # the subpath of your site, e.g. "/blog"
+baseurl                  : "/" # the subpath of your site, e.g. "/blog"
 repository               : "YHWong20/YHWong20.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : "/assets/images/logo.png"
@@ -135,7 +135,6 @@ footer:
 include:
   - .htaccess
   - _pages
-  - "_pages"
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
