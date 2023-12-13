@@ -16,9 +16,9 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Yi Hao's Personal Site"
+title                    : "Yi Hao's Webpage"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : "Documenting My Cybersecurity Journey." # site tagline that appears below site title in masthead
 name                     : "Wong Yi Hao"
 description              : "Documenting My Cybersecurity Journey."
 url                      : "https://YHWong20.github.io"
