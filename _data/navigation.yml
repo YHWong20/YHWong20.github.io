@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "About"
+    url: /_pages/about.md
   - title: "Blog"
     url: /_posts/
   - title: "Resume"
