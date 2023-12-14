@@ -30,7 +30,7 @@ $ file vuln
 BuildID[sha1]=685b06b911b19065f27c2d369c18ed09fbadb543, for GNU/Linux 3.2.0, not stripped
 
 $ checksec vuln                                                                     
-[*] '/mnt/c/Users/yihao/Downloads/picoCTF/2022/blog/vuln'
+[*] '.../vuln'
     Arch:     i386-32-little
     RELRO:    Partial RELRO
     Stack:    No canary found
