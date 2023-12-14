@@ -16,7 +16,6 @@ This is the first "proper" binary exploitation (ret2win) challenge in this CTF.
 
 For this challenge, I found John Hammond's [walkthrough video](https://www.youtube.com/watch?v=k4hqdVo3cqk&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=31&pp=iAQB) to be extremely helpful and informative.
 
-
 ## My Solution
 Firstly, let's download the provided files.
 ```bash
