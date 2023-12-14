@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Yi Hao's Webpage"
+title                    : "Yi Hao's Blog"
 title_separator          : "-"
 subtitle                 : "Documenting My Cybersecurity Journey." # site tagline that appears below site title in masthead
 name                     : "Wong Yi Hao"
@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "Yi Hao Wong"
   avatar           : "/assets/images/profile.jpg"
-  bio              : "3rd Year Information Security @ NUS, Aspiring Cybersecurity/Cloud Security Engineer"
+  bio              : "NUS Information Security, Aspiring Cybersecurity/Cloud Security Engineer"
   location         : "Singapore"
   email            :
   links:
