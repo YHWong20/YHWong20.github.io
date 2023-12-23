@@ -12,7 +12,9 @@ toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 ---
 
-Another ret2win challenge, but this deals with 64-bit binaries instead of 32-bit.
+Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit.
+
+As usual, John Hammond's [walkthrough video](https://www.youtube.com/watch?v=eg0gULifHFI&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=42) was very helpful for this challenge.
 
 ## My Solution
 Let's take a look at the `vuln` binary. Using `file` and `checksec`, we observe the following:
