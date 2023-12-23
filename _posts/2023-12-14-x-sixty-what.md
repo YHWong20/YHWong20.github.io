@@ -93,7 +93,7 @@ gef➤ pattern create 150
 aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaaqaaaaaaaraaaaaaasaaaaa
 [+] Saved as '$_gef0'
 gef➤  r
-Starting program: /mnt/c/Users/Gamer/Downloads/PicoCTF/2022/blog/vuln
+Starting program: .../vuln
 Welcome to 64-bit. Give me a string that gets you the flag:
 aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaaqaaaaaaaraaaaaaasaaaaa
 
@@ -125,7 +125,7 @@ gef➤  pattern create 78
 aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaa
 [+] Saved as '$_gef5'
 gef➤  r
-Starting program: /mnt/c/Users/Gamer/Downloads/PicoCTF/2022/blog/vuln
+Starting program: .../vuln
 Welcome to 64-bit. Give me a string that gets you the flag:
 aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaa
 
