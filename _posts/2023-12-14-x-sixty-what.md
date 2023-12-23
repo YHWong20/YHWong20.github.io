@@ -12,8 +12,7 @@ toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 ---
 
-Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit.
-
+Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit.</br>
 As usual, John Hammond's [walkthrough video](https://www.youtube.com/watch?v=eg0gULifHFI&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=42) was very helpful for this challenge.
 
 ## My Solution
@@ -179,7 +178,7 @@ $
 ```
 
 ## Learning Takeaways
-**Why did the program fail to call `flag()` when we loaded the address of flag into the payload?**
+### Why did the program fail to call `flag()` when we loaded the address of flag into the payload?
 Let's disassemble `flag()`.
 ```bash
 gef➤  disas flag
