@@ -13,6 +13,8 @@ toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit."
 ---
 
+Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit.
+
 ## My Solution
 Let's take a look at the `vuln` binary. Using `file` and `checksec`, we observe the following:
 ```bash

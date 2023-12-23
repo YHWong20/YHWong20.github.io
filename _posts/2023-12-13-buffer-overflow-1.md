@@ -10,8 +10,9 @@ tags:
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
-excerpt: "This is the first "proper" binary exploitation (ret2win) challenge in this CTF."
 ---
+
+This is the first "proper" binary exploitation (ret2win) challenge in this CTF.
 
 For this challenge, I found John Hammond's [walkthrough video](https://www.youtube.com/watch?v=k4hqdVo3cqk&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=31&pp=iAQB) to be extremely helpful and informative.
 

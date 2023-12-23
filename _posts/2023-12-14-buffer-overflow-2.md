@@ -13,6 +13,8 @@ toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "A ret2win challenge that involves parameters on the call stack."
 ---
 
+A ret2win challenge that involves parameters on the call stack.
+
 ## Preamble - The Call Stack
 Referring to the following diagram of a call stack,
 ![Call Stack](https://avinetworks.com/wp-content/uploads/2020/06/buffer-overflow-diagram.png)
