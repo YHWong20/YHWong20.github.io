@@ -10,10 +10,11 @@ tags:
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
+excerpt: "A ret2win challenge that involves parameters on the call stack."
 ---
 
-A ret2win challenge that involves parameters on the call stack.</br>
-Referring to the following diagram,
+## Preamble - The Call Stack
+Referring to the following diagram of a call stack,
 ![Call Stack](https://avinetworks.com/wp-content/uploads/2020/06/buffer-overflow-diagram.png)
 We note the relative locations of the base pointer, return function and parameters on our call stack. This will come in handy later.
 
