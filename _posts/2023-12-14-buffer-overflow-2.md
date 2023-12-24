@@ -18,7 +18,8 @@ A ret2win challenge that involves parameters on the call stack.
 ## Preamble - The Call Stack
 Referring to the following diagram of a call stack,
 ![Call Stack](https://avinetworks.com/wp-content/uploads/2020/06/buffer-overflow-diagram.png)
-We note the relative locations of the base pointer, return function and parameters on our call stack. This will come in handy later.
+
+We wish to note the relative locations of the base pointer, return function and parameters on our call stack. This will come in handy later.
 
 
 ## My Solution
