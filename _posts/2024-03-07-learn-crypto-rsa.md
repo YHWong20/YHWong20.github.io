@@ -7,6 +7,7 @@ categories:
 tags:
   - crypto
 toc: true
+use_math: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 ---
