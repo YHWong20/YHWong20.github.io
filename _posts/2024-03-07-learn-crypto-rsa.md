@@ -55,10 +55,7 @@ Let's take a look at the "Textbook" RSA algorithm:
 2. Then, compute $n=pq$.
 3. Compute $\phi(n)$, where $\phi(n)=(p-1)(q-1)$. Likewise, ensure $\phi(n)$ remains secret.
 4. Choose an exponent $e$ such that $e$ and $\phi(n)$ are relatively prime/coprime. That is, $gcd(e, \phi(n))=1$.
-5. Lastly, compute $d$. Since $e$ and $\phi(n)$ are coprime, the following relation thus holds:
-$$1 \equiv de \mod \phi(n)$$
-And therefore,
-$$d \equiv e^{-1} \mod \phi(n)$$
+5. Lastly, compute $d$. Since $e$ and $\phi(n)$ are coprime, the following relation thus holds:<br>$$1 \equiv de \mod \phi(n)$$<br>And therefore,<br>$$d \equiv e^{-1} \mod \phi(n)$$
 
 That's it. The logic here is unnervingly simple. Yet, it remains secure.
 
@@ -105,8 +102,7 @@ Here is a non-exhaustive list of potential RSA attacks:
 * Coppersmith's attack/Hastad's Broadcast attack, for small exponents $e$. The Chinese Remainder Theorem is utilized in this attack.
 * GCD of $e$ and $\phi(n)$ is not 1 - use Euclidean Algorithm to find a common factor for N.
 * Exploiting the homomorphic property of RSA:
-Recall that $enc(m) = m^e \mod n$. Then, given the homomorphic property of RSA,
-
+Recall that $enc(m) = m^e \mod n$. Then, given the homomorphic property of RSA,<br>
 $$enc(m_1) \times enc(m_2) = m_1^e \mod n \times m_2^e \mod n \\
 = (m_1^em_2^e) \mod n \\
 = (m_1m_2)^e \mod n \\
