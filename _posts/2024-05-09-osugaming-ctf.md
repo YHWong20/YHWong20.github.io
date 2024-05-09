@@ -5,7 +5,6 @@ categories:
   - Learning
   - Reverse Engineering
 tags:
-  - reverse
   - ctf
 toc: true
 use_math: true
