@@ -2,7 +2,6 @@
 layout: single
 title:  "osu!gaming CTF 2024 - wysi-baby"
 categories: 
-  - Learning
   - Reverse Engineering
 tags:
   - ctf
