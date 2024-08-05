@@ -10,6 +10,7 @@ toc: true
 use_math: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
+excerpt: "A primer to the RSA Cryptosystem."
 author_profile: false
 sidebar:
   nav: "navbar"
