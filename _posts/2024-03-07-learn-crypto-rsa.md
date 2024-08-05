@@ -1,15 +1,18 @@
 ---
 layout: single
-title:  "Cryptography - RSA"
+title:  "Cryptography: RSA"
 categories: 
-  - Learning
-  - Cryptography
+  - Notes
 tags:
   - crypto
+  - notes
 toc: true
 use_math: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
+author_profile: false
+sidebar:
+  nav: "navbar"
 ---
 
 Hiya! It's been a while since I last made a post here.

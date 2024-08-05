@@ -2,15 +2,18 @@
 layout: single
 title:  "PicoCTF 2022 - buffer overflow 3"
 categories: 
-  - PicoCTF
   - Binary Exploitation
 tags:
+  - pwn
   - ctf
   - picoctf
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "An introduction to stack canaries + ret2win."
+author_profile: false
+sidebar:
+  nav: "navbar"
 ---
 
 An introduction to stack canaries + ret2win.

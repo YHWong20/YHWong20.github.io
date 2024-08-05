@@ -4,11 +4,15 @@ title:  "osu!gaming CTF 2024 - wysi-baby"
 categories: 
   - Reverse Engineering
 tags:
+  - reverse
   - ctf
 toc: true
 use_math: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
+author_profile: false
+sidebar:
+  nav: "navbar"
 ---
 
 Hello!

@@ -2,15 +2,18 @@
 layout: single
 title:  "PicoCTF 2022 - x-sixty-what"
 categories: 
-  - PicoCTF
   - Binary Exploitation
 tags:
+  - pwn
   - ctf
   - picoctf
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit."
+author_profile: false
+sidebar:
+  nav: "navbar"
 ---
 
 Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit.

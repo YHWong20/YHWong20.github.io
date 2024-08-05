@@ -4,9 +4,38 @@ main:
     url: /posts/
   - title: "Resume"
     url: /files/YiHaoWong_Resume.pdf
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
+
+navbar:
+  - title: Home
+    children:
+      - title: "About Me"
+        url: /
+  - title: CTF Writeups (Categories) 🚩
+    children:
+      - title: "Binary Exploitation/Pwn"
+        url: /categories/binary-exploitation
+      - title: "Cryptography"
+        url: /categories/cryptography
+      - title: "Reverse Engineering"
+        url: /categories/reverse-engineering
+      - title: "Forensics"
+        url: /categories/forensics
+      - title: "Web Exploitation"
+        url: /categories/web-exploitation
+      - title: "Miscellaneous"
+        url: /categories/misc
+  - title: HackTheBox 🖥
+    children:
+      - title: "Easy"
+        url: /categories/htb-easy/
+      - title: "Medium"
+        url: /categories/htb-medium/
+      - title: "Hard"
+        url: /categories/htb-hard/
+  - title: Notes 📒
+    children:
+      - title: "HTB CPTS/OSCP Prep"
+        url: /categories/pentest-notes/
+      - title: "Miscellaneous"
+        url: /categories/misc-notes/
+

@@ -2,15 +2,18 @@
 layout: single
 title:  "PicoCTF 2022 - buffer overflow 2"
 categories: 
-  - PicoCTF
   - Binary Exploitation
 tags:
+  - pwn
   - ctf
   - picoctf
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "A ret2win challenge that involves parameters on the call stack."
+author_profile: false
+sidebar:
+  nav: "navbar"
 ---
 
 A ret2win challenge that involves parameters on the call stack.

@@ -1,15 +1,18 @@
 ---
 layout: single
 title:  "PicoCTF 2022 - buffer overflow 1"
-categories: 
-  - PicoCTF
+categories:
   - Binary Exploitation
 tags:
+  - pwn
   - ctf
   - picoctf
 toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
+author_profile: false
+sidebar:
+  nav: "navbar"
 ---
 
 This is the first "proper" binary exploitation (ret2win) challenge in this CTF.
