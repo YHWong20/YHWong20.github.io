@@ -10,6 +10,7 @@ toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: ""
+permalink: /posts/htb-boardlight
 author_profile: false
 sidebar:
   nav: "navbar"

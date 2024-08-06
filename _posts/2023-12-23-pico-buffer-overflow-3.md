@@ -11,6 +11,7 @@ toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "An introduction to stack canaries + ret2win."
+permalink: /posts/pico-buffer-overflow-3
 author_profile: false
 sidebar:
   nav: "navbar"

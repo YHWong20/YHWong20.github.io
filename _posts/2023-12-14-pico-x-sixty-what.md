@@ -11,6 +11,7 @@ toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "Another ret2win challenge. Interestingly, this deals with 64-bit binaries instead of 32-bit."
+permalink: /posts/pico-x-sixty-what
 author_profile: false
 sidebar:
   nav: "navbar"

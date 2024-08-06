@@ -11,6 +11,7 @@ toc: true
 toc_label: "Contents"
 toc_icon: "list"  # corresponding Font Awesome icon name (without fa prefix)
 excerpt: "A ret2win challenge that involves parameters on the call stack."
+permalink: /posts/pico-buffer-overflow-2
 author_profile: false
 sidebar:
   nav: "navbar"
